@@ -1,0 +1,56 @@
+/* 全体のスタイルと背景（中央寄せ） */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #4fa1db, #2e3d74);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 中央のカードデザイン */
+.container {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+h1 {
+  color: #333333;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+p {
+  color: #666666;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+/* ボタンのデザイン */
+button {
+  background-color: #4fa1db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #357ca5;
+}
+
+button:active {
+  transform: scale(0.96);
+}
