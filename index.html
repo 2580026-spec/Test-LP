@@ -3,17 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
+  <title>AIスマートミラー 使い方＆インタラクティブ体験ガイド</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1 id="title">Hello World!</h1>
-    <p id="message">ボタンを押すとメッセージが変わります。</p>
-    <button id="change-btn">クリックしてね！</button>
-  </div>
 
-  <!-- JavaScriptファイルの読み込み -->
+  <header>
+    <span class="badge">AI SMART MIRROR TUTORIAL</span>
+    <h1>忙しい朝を30秒で整える<br>AIスマートミラー体験</h1>
+    <p>鏡の前に立つだけで「天気・予定・持ち物・交通」をまとめて確認。準備の自動確認をシミュレーターで体験してみましょう。</p>
+  </header>
+
+  <main>
+    <!-- 1. インタラクティブ・シミュレーター -->
+    <section class="simulator-section">
+      <div class="simulator-header">
+        <div class="simulator-title">
+          <span>🪞</span> 朝の持ち物インタラクティブ・シミュレーター
+        </div>
+        <div class="sim-instruction">
+          💡 持ち物をバッグにドラッグ＆ドロップしてAIの反応を確認してみましょう
+        </div>
+      </div>
+
+      <!-- ミラー本体（HUDディスプレイ風） -->
+      <div class="mirror-frame">
+        <div class="mirror-grid">
+          <div class="mirror-widget">
+            <h4>🌤️ 天気予報</h4>
+            <p>18°C / 降水 60%<span style="font-size:0.8rem; font-weight:normal; display:block; color:var(--warning-color);">※夕方から雨の予測</span></p>
+          </div>
+          <div class="mirror-widget">
+            <h4>📅 今日の予定</h4>
+            <p>10:00 役所手続き<span style="font-size:0.8rem; font-weight:normal; display:block; color:var(--text-sub);">14:00 企画プレゼン</span></p>
+          </div>
+          <div class="mirror-widget">
+            <h4>🚦 交通情報</h4>
+            <p>〇〇線：通常運行<span style="font-size:0.8rem; font-weight:normal; display:block; color:var(--success-color);">推奨出発: 8:15</span></p>
+          </div>
+        </div>
+
+        <!-- カバン（ドロップエリア） -->
+        <div class="drop-zone-container" id="drop-zone">
+          <div class="drop-zone-header">
+            <div class="drop-zone-title">
+              <span>🎒</span> 準備した持ち物（お出かけバッグ）
+            </div>
+            <span class="item-count-badge" id="item-count">0 / 3 必須準備済</span>
+          </div>
+          <div class="bag-items-area" id="bag-items">
+            <div class="bag-empty-hint" id="empty-hint">ここに持っていくアイテムをドラッグ＆ドロップしてください</div>
+          </div>
+        </div>
+
+        <!-- 音声案内インジケーター（再生ボタンを追加） -->
+        <div class="audio-bar">
+          <button type="button" class="speaker-btn" id="btn-speak" title="音声を聞く">
+            <span class="speaker-icon" id="speaker-icon">🔊</span>
+          </button>
+          <div class="audio-text-container">
+            <div class="audio-label">AI Voice Assistant（ボタンを押すと喋ります）</div>
+            <div id="audio-text">
+              「おはようございます。本日は夕方から雨の予報です。必要な準備を始めましょう。」
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- パレット（持ち物一覧） -->
+      <div class="item-palette">
+        <div class="palette-title">
+          <span>準備する持ち物テーブル（ドラッグできます）</span>
+          <button class="btn-reset" id="btn-reset">リセット</button>
+        </div>
+        <div class="draggable-items" id="palette-items">
+          <div class="item-chip" draggable="true" id="item-umbrella" data-name="折りたたみ傘" data-required="true">
+            ☂️ 折りたたみ傘 <span style="font-size:0.75rem; color:var(--warning-color);">(雨予報)</span>
+          </div>
+          <div class="item-chip" draggable="true" id="item-document" data-name="役所の申請書類" data-required="true">
+            📄 役所の申請書類 <span style="font-size:0.75rem; color:var(--accent-color);">(10:00予定)</span>
+          </div>
+          <div class="item-chip" draggable="true" id="item-pc" data-name="ノートPC" data-required="true">
+            💻 ノートPC <span style="font-size:0.75rem; color:var(--accent-color);">(プレゼン用)</span>
+          </div>
+          <div class="item-chip" draggable="true" id="item-card" data-name="社員証・ID" data-required="false">
+            🪪 社員証・ID
+          </div>
+          <div class="item-chip" draggable="true" id="item-tumbler" data-name="マイボトル" data-required="false">
+            🥤 マイボトル
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 機能ステップ案内 -->
+    <h2 class="section-title">✨ 朝の準備をスムーズにする3ステップ</h2>
+    <section class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">Step 01</div>
+        <h3>鏡の前に立つだけ</h3>
+        <p>カメラとセンサーがあなたを認識。ボタン操作不要で、その日の天気・交通・予定が一画面に自動統合されます。</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Step 02</div>
+        <h3>予定・天候連動の持ち物予測</h3>
+        <p>「役所手続き」「雨の予報」などの情報から、今日持っていくべきアイテムをAIが自動で割り出して提案します。</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Step 03</div>
+        <h3>リアルタイム音声アシスト</h3>
+        <p>身支度中で画面を見つめていなくても、持ち物の準備状況や出発の最適なタイミングを声でやさしく案内します。</p>
+      </div>
+    </section>
+
+    <!-- 3. シーン別カスタマイズ（タブ切替） -->
+    <section class="interactive-section">
+      <h2 class="section-title" style="justify-content: flex-start; font-size: 1.3rem; margin-top:0; margin-bottom: 18px;">
+        👤 あなたのライフスタイルに合わせた表示最適化
+      </h2>
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="busy-worker">時間に追われる社会人</button>
+        <button class="tab-btn" data-tab="parent">子育て中の方</button>
+        <button class="tab-btn" data-tab="student">学生の方</button>
+      </div>
+
+      <div id="busy-worker" class="tab-content active">
+        <p><strong>おすすめ設定：運行情報＋重要会議アラート</strong></p>
+        <p style="color: var(--text-sub); margin-top: 8px;">
+          電車の遅延情報をリアルタイムで検知し、「通常より10分早く出発してください」等の通知を表示。プレゼン資料や出張アイテムの忘れ物も未然に防止します。
+        </p>
+        <div class="preset-notice" data-preset="worker">👉 このシミュレーションモードを試す</div>
+      </div>
+
+      <div id="parent" class="tab-content">
+        <p><strong>おすすめ設定：家族の予定＋保護者用持ち物チェック</strong></p>
+        <p style="color: var(--text-sub); margin-top: 8px;">
+          自分の仕事予定に加え、お子様の行事・習い事も提示。「保護者証」「連絡帳」「水筒」など、多忙な朝にうっかり抜けがちなアイテムを音声でリマインドします。
+        </p>
+        <div class="preset-notice" data-preset="parent">👉 このシミュレーションモードを試す</div>
+      </div>
+
+      <div id="student" class="tab-content">
+        <p><strong>おすすめ設定：時間割連動＋レイングッズ通知</strong></p>
+        <p style="color: var(--text-sub); margin-top: 8px;">
+          大学の講義時間割やバイトシフトに合わせて通知。ゲリラ豪雨の予報がある日は「折りたたみ傘」を太字表示し、快適な1日をサポートします。
+        </p>
+        <div class="preset-notice" data-preset="student">👉 このシミュレーションモードを試す</div>
+      </div>
+    </section>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
